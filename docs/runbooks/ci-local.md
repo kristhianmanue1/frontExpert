@@ -4,7 +4,7 @@
 
 ## Registro del runner (una vez por caja)
 
-1. GitHub → `AGTexperts/frontExpert` → **Settings → Actions → Runners → New self-hosted runner**.
+1. GitHub → `kristhianmanue1/frontExpert` (pasará a `AGTexperts` cuando exista la org y se transfiera) → **Settings → Actions → Runners → New self-hosted runner**.
 2. Seguir los comandos que GitHub imprime (descarga, `config.sh` con labels: `self-hosted,linux,docker` en Linux, `self-hosted,macos` en Mac).
 3. Instalar como servicio para que arranque con la máquina: `./svc.sh install && ./svc.sh start`.
 4. Verificar en la UI de Runners que aparezca **Idle**.
