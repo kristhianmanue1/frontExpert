@@ -10,7 +10,7 @@ El corpus admitía dos lecturas: el README hablaba de "definir el stack", pero l
 
 - **frontExpert es un playbook puro:** este repo no contiene ni contendrá código de producto (ni `apps/` ni `packages/` de aplicación). Su entregable: spec, ADRs de referencia, plantillas, scripts de verificación y runbooks.
 - Las **fases 1–6 de `02` son la guía que ejecuta cada proyecto adoptante**, en su propio repositorio.
-- **Contrato de adopción:** el adoptante (1) copia el corpus (`docs/`, `plantillas/`, `scripts/`, `.frontexpert/` — lista enmendada por ADR-0013: manifiesto de integridad + `verify-corpus.sh`), (2) responde las 8 preguntas de `04` con sus propias respuestas —las de la tabla son defaults de referencia, revocables— y confirma o sustituye los ADRs, y (3) devuelve upstream las lecciones (contradicciones, parches, ADRs nuevos) para que el manual mejore con cada adopción.
+- **Contrato de adopción:** el adoptante (1) copia el corpus —todo lo que cubre el manifiesto: `docs/`, `plantillas/`, `scripts/`, `.frontexpert/`, `README.md`, `LICENSE`, `AGENTS.md`, `CONTRIBUTING.md`, `.github/`— (lista enmendada por ADR-0013 y por la ronda de `docs/08`: una copia literal debe verificar en verde con `verify-corpus.sh`), (2) responde las 8 preguntas de `04` con sus propias respuestas —las de la tabla son defaults de referencia, revocables— y confirma o sustituye los ADRs, y (3) devuelve upstream las lecciones (contradicciones, parches, ADRs nuevos; mecanismo: `CONTRIBUTING.md`) para que el manual mejore con cada adopción.
 - El runner local y el mini-CI de documentación (lint de markdown + `verify-stack.sh`) quedan como **opcionales** para este repo; nada del playbook depende de ellos.
 
 ## Consecuencias

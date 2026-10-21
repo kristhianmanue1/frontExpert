@@ -12,6 +12,21 @@
 3. Lee `docs/handoff.md`, que tiene el estado de la sesión anterior. Actualízalo al terminar.
 4. Si la tarea es ambigua o choca con un ADR, **detente y pregunta**.
 
+## Precedencia (el adoptante la declara; la plantilla la trae redactada)
+
+Ante conflicto, gana el peldaño más alto:
+
+1. Instrucción directa del humano que gobierna la tarea. Si choca con una regla dura de este archivo, se confirma explícitamente antes de actuar.
+2. `AGENTS.md` del proyecto adoptante: raíz y locales (`apps/web`, `apps/native`, `packages/ai`).
+3. ADRs locales del adoptante (`docs/adr/`).
+4. Manual de dominio frontExpert: defaults revocables (ADR-0012).
+5. Método skevi —peldaño que solo existe si el adoptante también lo adoptó—: rigor de evidencia, fail-closed, autoridad graduada.
+6. Supuestos propios: siempre pierden.
+
+- **Procedencia por peldaño:** una regla sin fuente citada (archivo y sección) no es aplicable.
+- **Planos no pisables:** un default de conveniencia del manual (peldaño 4) no se interpreta como debilitamiento de un plano de método adoptado (peldaño 5); debilitarlo exige ADR local del adoptante antes de actuar.
+- Sin desempate claro entre peldaños: vale la regla «detente y pregunta» de «Antes de escribir código».
+
 ## Mapa del repo
 
 - `apps/web` Next.js 16 App Router · `apps/native` Expo SDK 58

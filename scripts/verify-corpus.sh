@@ -5,7 +5,7 @@
 # o hash distinto → exit 1. Correr desde cualquier directorio; copiable sin edición.
 # Este script ES parte del corpus: editarlo exige regenerar el manifiesto en el mismo commit.
 # Regenerar manifiesto desde la raíz del repo:
-#   find README.md LICENSE docs fuente plantillas scripts -type f -print0 | sort -z | xargs -0 shasum -a 256 > .frontexpert/corpus-manifest-v1.sha256
+#   find README.md LICENSE AGENTS.md CONTRIBUTING.md .github docs fuente plantillas scripts -type f -print0 | sort -z | xargs -0 shasum -a 256 > .frontexpert/corpus-manifest-v1.sha256
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
