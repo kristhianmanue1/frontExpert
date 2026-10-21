@@ -45,3 +45,4 @@
 5. ¿Existe sistema de diseño en Figma o se parte de shadcn por defecto?
 6. ¿Qué agentes de desarrollo usará el equipo (Claude Code, Codex, Cursor)? Afecta la configuración, no la arquitectura.
 7. ¿Requisitos regulatorios (LFPDPPP, accesibilidad WCAG 2.2 AA obligatoria, datos de salud o financieros)?
+8. **¿GitHub Pro (~USD 4/mes), org con plan, o control procedural hasta fase 1?** La protección de `main` (PR + 1 revisión, sin force-push) está paywalleada en repos privados del plan Free (403 verificado, ADR-0010). El repo vive mientras tanto en `kristhianmanue1/frontExpert` (privado); cuando exista la org, `gh repo transfer` lo mueve completo.

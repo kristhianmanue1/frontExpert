@@ -17,8 +17,8 @@
 
 ## Protección de `main`
 
-- Configurada al crear el repo: PR obligatorio, 1 revisión humana (se descarta al subir cambios nuevos), sin force-push ni borrado.
-- Verificar: `gh api repos/AGTexperts/frontExpert/branches/main/protection`.
+- **Pendiente de plan (verificado 21-oct):** branch protection y rulesets devuelven 403 en repos privados con plan Free. Al subir a GitHub Pro o crear la org: PR obligatorio, 1 revisión humana (descartada al subir cambios), sin force-push ni borrado, con `gh api repos/<owner>/frontExpert/branches/main/protection`.
+- Mientras tanto el control es procedural: el agente nunca hace push a `main` (regla de `03 §3` y de `AGENTS.md`); los merges los hace el humano.
 - Los **checks requeridos** se añaden en la fase 1 con el primer workflow (`lint`, `typecheck`, `test`, `spec-lint`, `build`): Settings → Branches → Require status checks. Hasta entonces, la revisión humana es el único gate.
 
 ## Cola y mantenimiento
