@@ -2,7 +2,7 @@
 
 **Objetivo:** definir el stack frontend (web, iOS y Android) más **mantenible y actualizable** para que lo desarrollen **agentes de IA** bajo supervisión humana.
 **Estado:** preproyecto: análisis crítico del spec recibido y propuesta v2 para consenso. Todavía no hay código.
-**Fecha:** 2026-10-17 (versiones verificadas en esta fecha).
+**Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010).
 
 ## Resumen ejecutivo
 
@@ -17,7 +17,7 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | 🟡 Medio | MCPs redundantes (Filesystem, Sequential Thinking) y uno de terceros (DesignRevision) cuando existe el **oficial de shadcn**. Falta el **MCP oficial de Expo** y la documentación de la versión instalada de Next |
 | 🟡 Medio | Faltan pruebas móviles, CI, autenticación, observabilidad, evals de IA, i18n, política de upgrades y seguridad de los agentes del producto |
 | 🟠 Alto | *(tras la ronda adversarial)* `needsApproval` está **deprecado** y su reemplazo es `toolApproval`. La aprobación llega en el historial que envía el cliente, así que hay que validarla contra un registro del servidor. Faltaban además ambientes con rollback, costo por request, un mecanismo de spikes y descarte, y `spec-lint` → `docs/05` |
-| 🟠 Alto | *(2ª ronda adversarial, 21-oct)* Los **previews por PR** (web y canal EAS móvil) corrían código escrito por el agente sin aislamiento de secretos: ahora solo credenciales sandbox efímeras, y los secretos de staging/producción se inyectan solo por merge a `main` → `docs/07`, `02 §9` |
+| 🟠 Alto | *(2ª ronda adversarial, 21-oct)* Los **jobs de PR** corrían código escrito por el agente sin aislamiento de secretos: ahora contenedor efímero sin secretos del host, y los de staging/producción se inyectan solo por merge a `main`; previews por PR recortados por presupuesto (ADR-0010) → `docs/07`, `02 §9` |
 | 🟢 | Varios criterios de aceptación no se pueden verificar. Se reemplazaron por métricas medibles en CI |
 
 ## Contenido

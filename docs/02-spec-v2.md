@@ -238,19 +238,19 @@ Cada fase cierra con CI en verde, una entrada en `CHANGELOG.md` (changesets), su
 
 | Ambiente | Web | Nativo | Datos | Quién despliega |
 |---|---|---|---|---|
-| **preview** (por PR) | Deploy efímero por PR | EAS Update, canal `preview` (QR en el PR) | BD de staging o seed, **nunca** producción | CI, automático |
-| **staging** | Rama `main` | Build interno (TestFlight / Internal testing) + canal `staging` | Datos sintéticos o anonimizados | CI al hacer merge |
+| **staging** | Deploy al hacer merge a `main` | Build interno (TestFlight / Internal testing) + canal `staging` (QR en el PR del merge) | Datos sintéticos o anonimizados | CI al hacer merge |
 | **production** | Promoción manual desde staging | Store + canal `production` | Producción | **Humano** (aprobación en el environment de CI) |
 
+- **Sin previews por PR (ADR-0010, 21-oct):** por presupuesto se elimina el deploy efímero por PR (web y canal `preview` de EAS). La verificación por PR queda en CI (builds y tests en el runner local); lo visual y con datos, en `staging` al merge. Se compensa con smoke e2e en CI y rollback < 5 min.
 - **Rollback web:** se re-promueve el deploy anterior (instant rollback del hosting). Hay que poder hacerlo en < 5 min y está documentado en `docs/runbooks/rollback.md`.
 - **Rollback móvil:** `eas update:rollback` (o republicar el update anterior) para cambios JS/OTA. Los cambios nativos requieren un build nuevo, por eso **todo cambio nativo pasa antes por TestFlight o Internal testing**. Las versiones nativas se controlan con `runtimeVersion` (política `fingerprint`).
 - **Feature flags** para lo riesgoso y para los agentes nuevos del producto: se despliega apagado y se enciende por porcentaje.
 - **Migraciones de BD** expand/contract (compatibles hacia atrás), para que un rollback de código no rompa datos.
 - **Branch protection en `main`:** PR obligatorio, CI requerido, al menos 1 revisión humana, sin force-push. El token del agente **no tiene permiso** de push a `main` ni de aprobar PRs.
 - **Secrets por ambiente** en el gestor del hosting o de CI. El agente nunca accede a los de producción.
-- **Aislamiento de previews por PR (web y móvil).** El código de un PR lo escribe un agente y corre en el preview: se trata como no confiable.
-  1. Los deploys de PR usan **credenciales sandbox efímeras**: claves dummy con tope de gasto, BD/seed sintéticos, sin datos reales ni de staging.
-  2. Los secretos de staging/producción se inyectan **solo** en deploys disparados por merge a `main` (staging) o promoción manual (producción), nunca por eventos de PR. Aplica también al canal `preview` de EAS Update móvil (el QR del PR corre código del PR).
+- **Aislamiento de jobs disparados por PR.** El código de un PR lo escribe un agente y corre en el runner local: se trata como no confiable.
+  1. Los jobs de PR corren en un **contenedor efímero** (Docker en el runner), sin secretos del host y sin secretos de ningún environment: solo claves dummy con tope de gasto y datos semilla sintéticos (environment `sandbox`).
+  2. Los secretos de staging/producción se inyectan **solo** en jobs disparados por merge a `main` (staging) o promoción manual (producción), nunca por eventos de PR (ADR-0010).
 
 ## 10. Iteración en espiral: spikes y descarte
 

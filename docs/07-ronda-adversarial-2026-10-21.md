@@ -47,7 +47,7 @@
 - El corpus pasó a control de versiones: `5727ea5` = estado revisado (tag `docs-v0.1`); este lote de parches es el segundo commit (tag `docs-v0.2`). **Sin remoto todavía**: crearlo, proteger `main` (PR obligatorio, CI requerido, 1 revisión humana) y dar acceso al agente sin push a `main` sigue siendo tarea humana.
 - Quedan fuera de este lote, por ser decisiones humanas: cerrar los ADRs 0001–0008 (0004 y 0008 con recomendación lista en `04`), responder las 7 preguntas abiertas, reclamar los 25 hallazgos individuales de la primera ronda (`05`) y crear el remoto. Para arrancar la fase 1 sin los ocho ADRs, primero se enmienda la puerta de fase 0 (`02 §6`) con un ADR.
 
-SHA-256 del corpus parcheado (excluido este archivo):
+SHA-256 del corpus parcheado en el tag `docs-v0.2` (excluido este archivo; los cambios posteriores —ADR-0010, recorte de previews— viven en su propio commit):
 
 ```
 c3482645890e231f1a219718474afa1a5111c168a49feb902e9446c50ba796a9  README.md

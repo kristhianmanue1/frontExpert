@@ -13,6 +13,7 @@
 | **0007** | Hosting web | Vercel (menor fricción con Next) **o** self-host con Build Adapters API (estable desde 16.2) | Cloudflare, AWS | Producto + infra |
 | **0008** | i18n y analytics | `next-intl` + catálogo tipado de eventos en `core/analytics.ts` (PostHog o similar) | — | Producto |
 | **0009** | Tailwind en nativo | Spike en la fase 1, **time-box de 2 días**: NativeWind 5 rc frente a Uniwind 1.x (ambos Tailwind v4) frente a NativeWind 4 estable (Tailwind v3). Se decide por estabilidad y paridad de tokens. **Default si expira sin ganador claro:** NativeWind 4 con tokens generados desde `packages/tokens/theme.css` — se preserva la fuente única aunque baje la major de Tailwind en nativo (el time-box genérico ya lo exige §10; aquí queda el default que faltaba) | — | Tech lead |
+| **0010** | Infraestructura de CI | **Decidida (21-oct):** GitHub + runner self-hosted local (Docker; jobs de PR contenedorizados y sin secretos). Previews por PR eliminados: staging al merge. Ver `adr/0010` | Forgejo/Gitea interno (self-host total); bare git + hooks (mínimo, sin gates de revisión) | Tech lead ✓ (sesión 21-oct) |
 
 ## Registro de riesgos
 
@@ -32,8 +33,8 @@
 | R12 | Aprobación de tools falsificada o reutilizada vía historial del cliente | Media | **Alto** | Historial cargado desde la BD, `approvalId` persistido, de un solo uso, ligado al usuario y al hash de argumentos (spec §4) |
 | R13 | MCP de navegador usado vía DNS rebinding o con el perfil real del usuario | Media | Alto | stdio, `--isolated`, allowlist de orígenes, versión parcheada (CVE-2025-9611) |
 | R14 | Spikes y código experimental que se vuelven producción | Alta | Medio | `experiments/` con caducidad verificada en CI, reimplementación obligatoria (spec §10) |
-| R15 | Despliegue sin vuelta atrás (sobre todo nativo) | Media | Alto | Ambientes preview/staging/prod, rollback < 5 min, `runtimeVersion` fingerprint, flags (spec §9) |
-| R16 | Código de un PR de agente corre en el preview y exfiltra credenciales | Media | Alto | Credenciales sandbox efímeras en previews por PR (web y EAS móvil), secretos de staging/prod solo por merge a `main`, test de environment en CI (spec §9) |
+| R15 | Despliegue sin vuelta atrás (sobre todo nativo) | Media | Alto | Ambientes staging/prod (previews por PR recortados, ADR-0010), rollback < 5 min, `runtimeVersion` fingerprint, flags (spec §9) |
+| R16 | Código de un PR de agente corre en CI/preview y exfiltra credenciales | Media | Alto | Jobs de PR en contenedor efímero sin secretos (environment `sandbox`), secretos de staging/prod solo por merge a `main`, test de environment en CI (spec §9, ADR-0010) |
 
 ## Preguntas abiertas para el equipo o el cliente
 
