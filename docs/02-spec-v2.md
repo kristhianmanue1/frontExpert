@@ -76,9 +76,11 @@
 │   └── spec-lint/            # El spec ejecutable: reglas deterministas (§11)
 ├── experiments/              # Spikes con caducidad, fuera del build (§10)
 ├── docs/
-│   ├── adr/                  # Decisiones (formato MADR corto)
+│   ├── adr/                  # Decisiones (plantilla: plantillas/adr.md, formato MADR corto)
+│   ├── handoff.md            # Estado entre sesiones (se reescribe al cerrar cada una, ver 03 §6)
 │   ├── ideas.md              # Destino del scope creep
-│   └── runbooks/             # upgrade-next.md, upgrade-expo.md, release-mobile.md
+│   ├── spikes/               # Notas de salida de los spikes (§10)
+│   └── runbooks/             # upgrade-next.md, upgrade-expo.md, release-mobile.md, rollback.md
 └── .github/workflows/
 ```
 
@@ -155,7 +157,7 @@ Monorepo pnpm + Turborepo. `apps/web` con landing SSG semántica. `apps/native` 
 - [ ] `core` tiene 1 tipo, 1 schema Zod y 1 cliente tipado, todos con tests, **y lo importan web y nativo**.
 - [ ] Al cambiar un token en `packages/tokens/theme.css` cambian web y nativo (test visual o snapshot).
 - [ ] Landing: `html-validate` sin errores, axe sin violaciones serias o críticas, `<h1>` y contenido visibles con JS deshabilitado.
-- [ ] LCP < 2.5 s, CLS < 0.1 (Lighthouse CI, mediana de 3 corridas).
+- [ ] LCP < 2.5 s, INP < 200 ms, CLS < 0.1 (Lighthouse CI, mediana de 3 corridas, en el ambiente declarado en la configuración de CI).
 - [ ] `robots.txt`, `sitemap.xml` y `llms.txt` responden 200.
 - [ ] Ningún paquete CSS-in-JS en el lockfile (check en CI).
 - [ ] gitleaks en pre-commit y en CI.
@@ -246,6 +248,9 @@ Cada fase cierra con CI en verde, una entrada en `CHANGELOG.md` (changesets), su
 - **Migraciones de BD** expand/contract (compatibles hacia atrás), para que un rollback de código no rompa datos.
 - **Branch protection en `main`:** PR obligatorio, CI requerido, al menos 1 revisión humana, sin force-push. El token del agente **no tiene permiso** de push a `main` ni de aprobar PRs.
 - **Secrets por ambiente** en el gestor del hosting o de CI. El agente nunca accede a los de producción.
+- **Aislamiento de previews por PR (web y móvil).** El código de un PR lo escribe un agente y corre en el preview: se trata como no confiable.
+  1. Los deploys de PR usan **credenciales sandbox efímeras**: claves dummy con tope de gasto, BD/seed sintéticos, sin datos reales ni de staging.
+  2. Los secretos de staging/producción se inyectan **solo** en deploys disparados por merge a `main` (staging) o promoción manual (producción), nunca por eventos de PR. Aplica también al canal `preview` de EAS Update móvil (el QR del PR corre código del PR).
 
 ## 10. Iteración en espiral: spikes y descarte
 

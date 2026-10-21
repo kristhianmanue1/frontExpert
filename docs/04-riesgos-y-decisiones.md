@@ -6,13 +6,13 @@
 |---|---|---|---|---|
 | **0001** | Stack base y versiones fijadas | Tal como está en `02-spec-v2.md §1` | — | Tech lead |
 | **0002** | Política de bots de IA | `robots.txt` + contenido público igual para todos y **sin bypass de auth**. Verificación en el edge solo para rate-limit | Web Bot Auth propio | Tech lead + seguridad |
-| **0003** | Backend | TypeScript: route handlers de Next para empezar; servicio separado (Hono o Fastify) si nativo y web necesitan una API estable versionada | FastAPI (solo con dependencia Python obligatoria, con tipos generados desde OpenAPI) | Tech lead |
+| **0003** | Backend | TypeScript: route handlers de Next para empezar; servicio separado (Hono o Fastify) si nativo y web necesitan una API estable versionada. **Nota:** debe resolver la persistencia transaccional que exige el registro de aprobaciones y el historial cargado desde BD (spec §4, riesgo R12) | FastAPI (solo con dependencia Python obligatoria, con tipos generados desde OpenAPI) | Tech lead |
 | **0004** | Orquestación de agentes | AI SDK 7 (`ToolLoopAgent` + `WorkflowAgent`) | Mastra 1.x si hace falta memoria/RAG gestionado o su Studio de evals; LangGraph.js solo con grafos cíclicos complejos | Tech lead + IA |
 | **0005** | Autenticación | Better Auth (self-hosted, TS, web + Expo) **o** Clerk (gestionado). Decidir por requisitos de datos y costo | Auth.js, Supabase Auth | Producto + seguridad |
 | **0006** | Lint/format | ESLint flat + Prettier (por compatibilidad con plugins de React Compiler y Tailwind) | Biome (más rápido, menos plugins) | Tech lead |
 | **0007** | Hosting web | Vercel (menor fricción con Next) **o** self-host con Build Adapters API (estable desde 16.2) | Cloudflare, AWS | Producto + infra |
-| **0009** | Tailwind en nativo | Spike en la fase 1: NativeWind 5 rc frente a Uniwind 1.x (ambos Tailwind v4) frente a NativeWind 4 estable (Tailwind v3, con tokens generados desde una fuente única). Se decide por estabilidad y paridad de tokens | — | Tech lead |
 | **0008** | i18n y analytics | `next-intl` + catálogo tipado de eventos en `core/analytics.ts` (PostHog o similar) | — | Producto |
+| **0009** | Tailwind en nativo | Spike en la fase 1, **time-box de 2 días**: NativeWind 5 rc frente a Uniwind 1.x (ambos Tailwind v4) frente a NativeWind 4 estable (Tailwind v3). Se decide por estabilidad y paridad de tokens. **Default si expira sin ganador claro:** NativeWind 4 con tokens generados desde `packages/tokens/theme.css` — se preserva la fuente única aunque baje la major de Tailwind en nativo (el time-box genérico ya lo exige §10; aquí queda el default que faltaba) | — | Tech lead |
 
 ## Registro de riesgos
 
@@ -28,11 +28,12 @@
 | R8 | Prompt injection en agentes del producto | Alta | Alto | Clasificación de tools, `toolApproval` en write/external con registro de aprobaciones en el servidor (un solo uso, hash de argumentos), contenido de tools tratado como dato, evals adversariales |
 | R9 | Cambio de proveedor de LLM rompe comportamiento | Media | Medio | `modelRegistry` + evals por proveedor |
 | R10 | TS 7 sin API programática rompe la toolchain | Alta (hoy) | Bajo | Fijar `typescript@~6.0.3` (typescript-eslint exige <6.1). TS 7 (`tsc` nativo) solo para type-check opcional. Revisar cuando typescript-eslint soporte 7 |
+| R11 | Dependencia de servicios freemium de terceros (MCPs, SaaS) | Media | Medio | Preferir oficiales y open source; ningún criterio de aceptación depende de un SaaS opcional |
 | R12 | Aprobación de tools falsificada o reutilizada vía historial del cliente | Media | **Alto** | Historial cargado desde la BD, `approvalId` persistido, de un solo uso, ligado al usuario y al hash de argumentos (spec §4) |
 | R13 | MCP de navegador usado vía DNS rebinding o con el perfil real del usuario | Media | Alto | stdio, `--isolated`, allowlist de orígenes, versión parcheada (CVE-2025-9611) |
 | R14 | Spikes y código experimental que se vuelven producción | Alta | Medio | `experiments/` con caducidad verificada en CI, reimplementación obligatoria (spec §10) |
 | R15 | Despliegue sin vuelta atrás (sobre todo nativo) | Media | Alto | Ambientes preview/staging/prod, rollback < 5 min, `runtimeVersion` fingerprint, flags (spec §9) |
-| R11 | Dependencia de servicios freemium de terceros (MCPs, SaaS) | Media | Medio | Preferir oficiales y open source; ningún criterio de aceptación depende de un SaaS opcional |
+| R16 | Código de un PR de agente corre en el preview y exfiltra credenciales | Media | Alto | Credenciales sandbox efímeras en previews por PR (web y EAS móvil), secretos de staging/prod solo por merge a `main`, test de environment en CI (spec §9) |
 
 ## Preguntas abiertas para el equipo o el cliente
 

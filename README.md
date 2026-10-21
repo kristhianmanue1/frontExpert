@@ -17,6 +17,7 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | 🟡 Medio | MCPs redundantes (Filesystem, Sequential Thinking) y uno de terceros (DesignRevision) cuando existe el **oficial de shadcn**. Falta el **MCP oficial de Expo** y la documentación de la versión instalada de Next |
 | 🟡 Medio | Faltan pruebas móviles, CI, autenticación, observabilidad, evals de IA, i18n, política de upgrades y seguridad de los agentes del producto |
 | 🟠 Alto | *(tras la ronda adversarial)* `needsApproval` está **deprecado** y su reemplazo es `toolApproval`. La aprobación llega en el historial que envía el cliente, así que hay que validarla contra un registro del servidor. Faltaban además ambientes con rollback, costo por request, un mecanismo de spikes y descarte, y `spec-lint` → `docs/05` |
+| 🟠 Alto | *(2ª ronda adversarial, 21-oct)* Los **previews por PR** (web y canal EAS móvil) corrían código escrito por el agente sin aislamiento de secretos: ahora solo credenciales sandbox efímeras, y los secretos de staging/producción se inyectan solo por merge a `main` → `docs/07`, `02 §9` |
 | 🟢 | Varios criterios de aceptación no se pueden verificar. Se reemplazaron por métricas medibles en CI |
 
 ## Contenido
@@ -30,6 +31,7 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | `docs/04-riesgos-y-decisiones.md` | ADRs pendientes de la fase 0, registro de riesgos y preguntas abiertas |
 | `docs/05-evaluacion-ronda-adversarial.md` | Evaluación de la ronda externa de 5 revisores: qué se adoptó, qué estaba mal calibrado y el hallazgo `toolApproval` |
 | `docs/06-verificacion-empirica.md` | **Verificación contra npm, el código publicado y GitHub Advisory**: qué se confirmó, qué se refutó (incluidos errores propios) y cómo repetirlo |
+| `docs/07-ronda-adversarial-2026-10-21.md` | 2ª ronda adversarial (revisor de contexto fresco): veredictos H1–H9/P1–P8, hallazgos nuevos N1–N4 y parches aplicados |
 | `docs/adr/0002-politica-bots-ia.md` | ADR del hallazgo crítico |
 | `plantillas/AGENTS.md` | Plantilla del archivo raíz para agentes |
 | `plantillas/tarea-agente.md` | Plantilla de issue para tareas de agente |

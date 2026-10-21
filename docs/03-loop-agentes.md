@@ -121,3 +121,5 @@ Para que cada sesión no empiece de cero, `docs/handoff.md` se actualiza **al ce
 | Tiempo medio de issue a merge | Línea base en la fase 1 |
 | Tareas en que el agente pidió aclaración (deseable cuando hay ambigüedad) | Se registra |
 | Incidentes por API desfasada | Tendencia a 0 |
+
+**Política de tests inestables.** Un test marcado flaky dos veces en 14 días pasa a **cuarentena** (suite aparte que no bloquea el gate) con un issue y un SLA de 7 días para arreglarse o eliminarse; el contador de cuarentena es visible en CI. Es la única salida legítima ante un gate intermitente: nunca `skip`, reintentos ciegos ni bajar umbrales (anti-patrón 15 del spec). Lighthouse CI corre en un **ambiente declarado en la configuración de CI**, con la mediana de 3 corridas del spec.

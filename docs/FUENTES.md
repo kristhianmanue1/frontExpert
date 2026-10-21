@@ -2,8 +2,14 @@
 
 > Algunas son fuentes primarias (nextjs.org, react.dev, expo.dev, shadcn, Anthropic) y otras son reportes secundarios. Las cifras secundarias se marcan como tales en el análisis. Hay que revalidarlas antes de citarlas externamente.
 
+## Verificación primaria (método de `docs/06`)
+
+- Registro de npm (`npm view`, dist-tags, peers): fuente de verdad de versiones.
+- Código publicado (`npm pack` + lectura de `dist/*.d.ts`, `dist/*.js` y README empaquetado).
+- GitHub Advisory Database (`gh api /advisories`): CVEs y versiones parcheadas.
+
 ## Frameworks y versiones
-- Next.js 16.3: https://nextjs.org/blog/next-16-3
+- Next.js 16.3 (docs empaquetadas): https://nextjs.org/blog/next-16-3 · **16.4.2 = vigente al 17-oct (verificada en npm, `06 §A`)**
 - Next.js 16 (proxy.ts, Turbopack): https://makerkit.dev/blog/md/tutorials/nextjs-16
 - CVE-2026-64642 (bypass de middleware/proxy): https://osv.dev/vulnerability/CVE-2026-64642 · https://advisories.gitlab.com/npm/next/CVE-2026-64642/
 - Next.js y agentes de IA (docs empaquetadas, AGENTS.md): https://nextjs.org/docs/app/guides/ai-agents
@@ -24,6 +30,7 @@
 - Expo SDK 55 (fin de Legacy Architecture): https://expo.dev/changelog/sdk-55
 - Expo SDK 56: https://expo.dev/changelog/sdk-56
 - Expo SDK 57: https://expo.dev/changelog/sdk-57
+- **Expo SDK 58 (vigente al 17-oct: RN 0.88.0, React 19.3.0; verificada con `npm pack expo` → `bundledNativeModules.json`)**: https://expo.dev/changelog/sdk-58
 - NativeWind v5: https://www.nativewind.dev/v5/guides/migrate-from-v4
 - Expo MCP Server: https://expo.dev/blog/become-an-ai-native-developer-with-the-expo-mcp-server · https://docs.expo.dev/eas/ai/mcp.md
 
