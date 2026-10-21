@@ -2,7 +2,7 @@
 
 El contrato de adopción (ADR-0012) dice «devuelve las lecciones upstream». Esta página dice por dónde (issue #1, punto 6; ronda registrada en `docs/08`).
 
-> **Precondición:** este canal requiere repo público (o issues habilitados para terceros). Mientras el repo sea privado, las lecciones se recogen por el canal interno del dueño y se migran aquí al hacerlo público (procedencia: ADR-0013).
+> **Precondición — cumplida:** el repo es **público** desde el 21-oct-2026; los terceros ya pueden abrir issues de lección. (Historia: mientras fue privado, las lecciones se recogían por el canal interno del dueño; procedencia: ADR-0013.)
 
 ## Cómo se devuelve una lección
 
