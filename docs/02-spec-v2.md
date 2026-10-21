@@ -34,10 +34,10 @@
 | Estilos móvil | NativeWind **o** Uniwind | **Decisión abierta (ADR-0009)** | Verificado: NativeWind v5 **no es estable** (solo `5.0.0-rc.0`, 13-sep-2026); `latest` es 4.2.7, de la línea Tailwind v3. Uniwind 1.12 soporta Tailwind ≥4. Se resuelve con un spike en la fase 1 |
 | Datos móvil | TanStack Query | 5.x | Fetchers y query keys en `packages/core` |
 | Build móvil | EAS Build + **EAS Update** (OTA) | | Canales `preview` y `production` |
-| Tests unit/integración | Vitest | 3.x/4.x | |
+| Tests unit/integración | Vitest | **5.x** (5.0.5, verificado 21-oct) | |
 | Tests e2e web | Playwright (código en CI + MCP para exploración) | | |
 | Tests e2e móvil | **Maestro** | | Flujos YAML, fáciles de escribir para un agente |
-| Lint/format | ESLint (flat config) + Prettier, **o** Biome | | Decisión en ADR-0006 |
+| Lint/format | ESLint (flat) + Prettier | ESLint **10.x** (10.13.0, verificado 21-oct) | ADR-0006 aceptado (21-oct); Biome solo con ADR futuro por rendimiento |
 | Observabilidad | OpenTelemetry + Sentry (web y nativo) | | Telemetría del AI SDK activa |
 | Actualizaciones | **Renovate** | | Agrupado por ecosistema (ver §8) |
 

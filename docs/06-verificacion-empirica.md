@@ -1,4 +1,4 @@
-# 06 — Verificación empírica (2026-10-17)
+# 06 — Verificación empírica (2026-10-17) · revalidada 2026-10-21 con `scripts/verify-stack.sh`
 
 **Método:** se descartó como prueba suficiente lo que dicen los resúmenes web, porque el modelo que resume páginas puede alucinar. Cada afirmación se verificó contra la **fuente primaria ejecutable**:
 
@@ -32,6 +32,24 @@ Los paquetes se descargaron al scratchpad de la sesión, fuera del proyecto, y n
 | `@playwright/mcp` | ≥ parche del CVE | 0.0.83 | ✅ |
 
 > **Lección:** la afirmación de que NativeWind v5 era estable salió de un resultado de búsqueda y era **falsa**. Fue el único error con impacto de arquitectura, porque la idea de "mismos tokens Tailwind v4 en web y nativo" dependía de ella. Ahora es una decisión abierta (ADR-0009) que se resuelve con un spike en la fase 1: NativeWind 5 RC, Uniwind 1.12 (Tailwind ≥4) o NativeWind 4 con tokens generados desde una fuente única.
+
+### Revalidación 2026-10-21 (`scripts/verify-stack.sh`)
+
+| Paquete | 17-oct | 21-oct | Δ |
+|---|---|---|---|
+| `next` | 16.4.2 | 16.4.2 | sin cambio |
+| `react` | 19.3.1 | 19.3.1 | sin cambio |
+| `ai` | 7.0.143 | 7.0.148 | parche |
+| `expo` | SDK 58 | 58.0.16 | parche |
+| `nativewind` | latest 4.2.7 · rc `5.0.0-rc.0` | **igual** | v5 sigue en RC → el default del ADR-0009 sigue vigente |
+| `tailwindcss` | 4.3.3 | 4.3.3 | sin cambio |
+| `typescript` | latest 7.0.2 | 7.0.2 | typescript-eslint sigue exigiendo `>=4.8.4 <6.1.0` (acepta eslint 10) |
+| `zod` / `pnpm` | 4.6.7 / 12.14.0 | 4.6.7 / 12.14.0 | sin cambio |
+| `@mastra/core` / `turbo` | 1.78.0 / 2.11.9 | 1.79.0 / 2.11.10 | minor / parche |
+| `@playwright/mcp` | 0.0.83 | 0.0.83 | CVEs sin cambios (parches 0.0.40 y 16.2.11 confirmados) |
+| **Nuevos (cierra H9)** | — | `vitest` **5.0.5** · `@tanstack/react-query` 5.104.5 · `eslint` **10.13.0** · `shadcn` 4.22.1 | Vitest corrige la major de `02 §1` (decía 3.x/4.x); ESLint confirma flat en 10.x |
+
+Los tarballs confirman `experimental_toolApprovalSecret` (`ai@7.0.148`, `dist/index.d.ts:3883`) y la advertencia *RCE-equivalent* en el README de `@playwright/mcp@0.0.83`. Sin cambios de major: ningún ADR de versión pendiente.
 
 ## B. Aprobación de tools en el AI SDK (código de `ai@7.0.143` y `@ai-sdk/provider-utils@5.0.62`)
 

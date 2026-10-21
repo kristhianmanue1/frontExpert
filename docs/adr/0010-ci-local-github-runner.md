@@ -17,7 +17,7 @@ Los créditos de GitHub se agotaron, así que el CI no puede correr en runners h
 ## Consecuencias
 
 - Se conservan intactos PRs, protección de rama, la revisión humana como control técnico, el MCP de GitHub y Renovate hosted.
-- **Hueco verificado (21-oct):** la protección de rama y los rulesets exigen GitHub Pro en repos privados (HTTP 403 comprobado en ambas APIs con plan Free). Hasta resolverse, "PR obligatorio + 1 revisión" es procedural. Pendiente humano: GitHub Pro (~USD 4/mes), crear la org `AGTexperts` con plan, o esperar a la fase 1. El repo ya sirve para el runner: los minutes no se consumen con runners self-hosted.
+- **Hueco verificado (21-oct):** la protección de rama y los rulesets exigen GitHub Pro en repos privados (HTTP 403 comprobado en ambas APIs con plan Free). Hasta resolverse, "PR obligatorio + 1 revisión" es procedural. Pendiente humano: GitHub Pro (~USD 4/mes), crear la org `AGTexperts` con plan, o esperar a la fase 1. El repo ya sirve para el runner: los minutes no se consumen con runners self-hosted. **Diferida (21-oct, orden del dueño):** el upgrade queda diferido; control procedural mientras tanto y nada del plan depende de esta respuesta.
 - La caja debe estar encendida para que el CI corra: se arranca en el Mac de desarrollo y se migra a una caja dedicada (Mac mini o Linux) cuando la fase 1 lo pida; un solo runner implica cola.
 - Los checks requeridos se activan con el primer workflow (fase 1); hasta entonces la protección cubre revisión y no-force-push.
 - Se pierde la inspección visual por PR; se compensa con smoke e2e en CI y rollback < 5 min (R15).
