@@ -1,6 +1,7 @@
 # 03 — Loop de desarrollo con agentes de IA
 
 > Cubre lo que el spec original dejó "del lado del dueño del proyecto": cómo se le da contexto al agente, qué herramientas puede usar, cómo se redactan las tareas y cómo se revisa lo que produce.
+> **Alcance (ADR-0012):** aplica al repositorio del proyecto adoptante.
 
 ## 1. Jerarquía de contexto (qué lee el agente y en qué orden)
 

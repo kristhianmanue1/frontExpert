@@ -44,7 +44,7 @@
 
 > Las versiones se revalidan al inicio de cada fase. Si cambia una mayor, se abre un ADR.
 
-## 2. Estructura del monorepo
+## 2. Estructura del monorepo (del proyecto adoptante)
 
 ```
 .

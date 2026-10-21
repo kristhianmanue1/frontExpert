@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # verify-stack.sh — Verificación de versiones del stack contra fuentes primarias.
+# Herramienta del playbook (no es código de producto — ADR-0012).
 # Origen: docs/06-verificacion-empirica.md §Cómo repetir. Correr antes de abrir cada fase.
 # Solo consulta (npm registry, GitHub Advisory); no instala nada en el repo.
 set -euo pipefail

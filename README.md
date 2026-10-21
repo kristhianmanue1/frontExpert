@@ -2,6 +2,7 @@
 
 **Objetivo:** entregar el playbook —el "cómo"— con el que proyectos de AGTexperts construyen y mantienen frontends (web, iOS y Android) con **agentes de IA** bajo supervisión humana. **Este repo no construye producto: lo adoptan otros** (ADR-0012).
 **Estado:** playbook (base adoptable). Fase 0 cerrada (ADR-0011); sin código de producto por decisión (ADR-0012).
+**Inventario (verificado 21-oct):** 23 archivos de documentación y plantillas + **un único script ejecutable** (`scripts/verify-stack.sh`, herramienta del manual). Sin `apps/`, sin `packages/`, sin `package.json`: nunca los habrá.
 **Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010).
 
 ## Resumen ejecutivo

@@ -1,6 +1,6 @@
 # Runbook · CI local (GitHub + runner self-hosted)
 
-> Decisión: `adr/0010`. El repo vive en GitHub; el CI corre en una caja propia con Docker.
+> Decisión: `adr/0010`. El repo vive en GitHub; el CI corre en una caja propia con Docker. **Aplica al repo del proyecto adoptante; en frontExpert es opcional (ADR-0012).**
 
 ## Registro del runner (una vez por caja)
 
