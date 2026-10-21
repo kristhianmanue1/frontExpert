@@ -15,6 +15,7 @@
 | **0009** | Tailwind en nativo | Spike en la fase 1, **time-box de 2 días**: NativeWind 5 rc frente a Uniwind 1.x (ambos Tailwind v4) frente a NativeWind 4 estable (Tailwind v3). Se decide por estabilidad y paridad de tokens. **Default si expira sin ganador claro:** NativeWind 4 con tokens generados desde `packages/tokens/theme.css` — se preserva la fuente única aunque baje la major de Tailwind en nativo (el time-box genérico ya lo exige §10; aquí queda el default que faltaba) | — | Tech lead |
 | **0010** | Infraestructura de CI | **Decidida (21-oct):** GitHub + runner self-hosted local (Docker; jobs de PR contenedorizados y sin secretos). Previews por PR eliminados: staging al merge. Ver `adr/0010` | Forgejo/Gitea interno (self-host total); bare git + hooks (mínimo, sin gates de revisión) | Tech lead ✓ (sesión 21-oct) |
 | **0011** | Puerta de fase 0 | **Decidida (21-oct):** se estrecha a lo que la fase 1 consume (0001/0002/0006/0010 + `AGENTS.md` + allowlist); 0003/0005/0007 con plazo "antes de fase 3". Ver `adr/0011` | Mantener la puerta original (retrasa el arranque sin proteger nada) | Dueño ✓ (sesión 21-oct) |
+| **0012** | Alcance del repo | **Decidida (21-oct):** playbook puro — sin código de producto aquí; las fases 1–6 las ejecuta cada adoptante; contrato de adopción (copiar / decidir / devolver). Ver `adr/0012` | Playbook + implementación de referencia (walking skeleton congelado aquí) | Dueño ✓ (sesión 21-oct) |
 
 ## Registro de riesgos
 
@@ -39,7 +40,7 @@
 
 ## Preguntas abiertas para el equipo o el cliente
 
-> Enmendado (21-oct, ADR-0011): cada pregunta lleva su **fecha real de necesidad** y un **default** que aplica si no hay respuesta a tiempo. Ningún default inventa: es el estado actual del spec o una asunción conservadora explícita, revocable en cuanto llega la respuesta.
+> Enmendado (21-oct, ADR-0011): cada pregunta lleva su **fecha real de necesidad** y un **default** que aplica si no hay respuesta a tiempo. Ningún default inventa: es el estado actual del spec o una asunción conservadora explícita, revocable en cuanto llega la respuesta. Con ADR-0012, estas son las preguntas del **contrato de adopción**: las responde cada proyecto adoptante; los defaults son la referencia que hereda si no dice nada.
 
 | # | Pregunta | Se necesita en | Default si no hay respuesta |
 |---|---|---|---|

@@ -1,6 +1,7 @@
 # 02 — SPEC v2 · Frontend + Mobile Agent-Ready (propuesta)
 
 > **Estado:** borrador para consenso · **Base:** spec recibido + `01-analisis-critico.md` · **Versiones verificadas:** 2026-10-17
+> **Alcance (ADR-0012):** este spec lo ejecuta cada proyecto adoptante en su propio repositorio; frontExpert no construye producto.
 > Este documento es el que se le entrega al agente. Es normativo: "DEBE", "NO DEBE" y "PUEDE" tienen el sentido de RFC 2119.
 
 ---

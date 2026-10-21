@@ -1,7 +1,7 @@
 # frontExpert — Preproyecto
 
-**Objetivo:** definir el stack frontend (web, iOS y Android) más **mantenible y actualizable** para que lo desarrollen **agentes de IA** bajo supervisión humana.
-**Estado:** preproyecto: análisis crítico del spec recibido y propuesta v2 para consenso. Todavía no hay código.
+**Objetivo:** entregar el playbook —el "cómo"— con el que proyectos de AGTexperts construyen y mantienen frontends (web, iOS y Android) con **agentes de IA** bajo supervisión humana. **Este repo no construye producto: lo adoptan otros** (ADR-0012).
+**Estado:** playbook (base adoptable). Fase 0 cerrada (ADR-0011); sin código de producto por decisión (ADR-0012).
 **Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010).
 
 ## Resumen ejecutivo
@@ -39,7 +39,7 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 
 ## Siguientes pasos
 
-1. **Fase 0 cerrada (21-oct, ADR-0011):** aceptados 0001, 0002, 0004, 0006, 0008, 0010; 0003/0005/0007 diferidos con plazo **antes de fase 3** (preguntas 3, 4 y 7); 0009 se resuelve en el spike de fase 1.
-2. **Paso siguiente:** registrar el runner local (`docs/runbooks/ci-local.md`) + primer workflow mínimo.
-3. Arrancar la fase 1: scaffold + loop de verificación + walking skeleton nativo.
-4. **Antes de fase 2:** definición corta de producto (pantallas y alcance del asistente) — el spec define el *cómo*; el *qué* le toca al dueño.
+1. **Cómo se adopta (ADR-0012):** el proyecto adoptante copia `docs/` + `plantillas/` + `scripts/verify-stack.sh`, responde las 8 preguntas de `04` con sus propias respuestas y confirma o sustituye los ADRs; devuelve las lecciones upstream.
+2. **Primera adopción:** identificar el primer proyecto y acompañar su fase 1 de cerca — el manual aún no ha sido ejecutado; la primera adopción lo estrena y lo corrige.
+3. **Opcional:** mini-CI de documentación en este repo (runner local + lint de markdown + `verify-stack.sh`); nada del playbook depende de ello.
+4. Los ADRs firmados aquí (0001–0012) son **defaults de referencia** con validez probada.
