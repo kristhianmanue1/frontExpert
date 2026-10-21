@@ -3,6 +3,9 @@
 # Herramienta del playbook (no es código de producto — ADR-0012).
 # Origen: docs/06-verificacion-empirica.md §Cómo repetir. Correr antes de abrir cada fase.
 # Solo consulta (npm registry, GitHub Advisory); no instala nada en el repo.
+# Es observación, no gate de CI (ADR-0013): reporta vigencia para comparar contra docs/06 §A.
+# Ojo: con `set -e`, sale !=0 si falta red o si los greps del bloque "Código publicado" dejan
+# de encontrar sus cadenas — eso también es señal, pero no lo convierte en gate de versiones.
 set -euo pipefail
 
 echo "== npm registry: versiones vigentes =="

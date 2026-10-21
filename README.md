@@ -2,7 +2,8 @@
 
 **Objetivo:** entregar el playbook —el "cómo"— con el que proyectos de AGTexperts construyen y mantienen frontends (web, iOS y Android) con **agentes de IA** bajo supervisión humana. **Este repo no construye producto: lo adoptan otros** (ADR-0012).
 **Estado:** playbook (base adoptable). Fase 0 cerrada (ADR-0011); sin código de producto por decisión (ADR-0012).
-**Inventario (verificado 21-oct):** 23 archivos de documentación y plantillas + **un único script ejecutable** (`scripts/verify-stack.sh`, herramienta del manual). Sin `apps/`, sin `packages/`, sin `package.json`: nunca los habrá.
+**Licencia:** Apache-2.0 (`LICENSE`, SPDX: Apache-2.0) — alineada con skevi para la adopción conjunta (ADR-0013).
+**Inventario (verificado 21-oct):** 24 archivos de documentación y plantillas + licencia Apache-2.0 + **dos scripts ejecutables** (`verify-stack.sh`, vigencia del stack — observación, no gate; `verify-corpus.sh`, integridad del corpus) + el manifiesto del corpus (`.frontexpert/`, ADR-0013). Sin `apps/`, sin `packages/`, sin `package.json`: nunca los habrá.
 **Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010).
 
 ## Resumen ejecutivo
@@ -34,13 +35,14 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | `docs/06-verificacion-empirica.md` | **Verificación contra npm, el código publicado y GitHub Advisory**: qué se confirmó, qué se refutó (incluidos errores propios) y cómo repetirlo |
 | `docs/07-ronda-adversarial-2026-10-21.md` | 2ª ronda adversarial (revisor de contexto fresco): veredictos H1–H9/P1–P8, hallazgos nuevos N1–N4 y parches aplicados |
 | `docs/adr/0002-politica-bots-ia.md` | ADR del hallazgo crítico |
+| `docs/adr/0013-adopcion-externa.md` | Licencia Apache-2.0, manifiesto del corpus (`.frontexpert/` + `verify-corpus.sh`) y corrección del inventario de ADRs |
 | `plantillas/AGENTS.md` | Plantilla del archivo raíz para agentes |
 | `plantillas/tarea-agente.md` | Plantilla de issue para tareas de agente |
 | `docs/FUENTES.md` | Fuentes consultadas |
 
 ## Siguientes pasos
 
-1. **Cómo se adopta (ADR-0012):** el proyecto adoptante copia `docs/` + `plantillas/` + `scripts/verify-stack.sh`, responde las 8 preguntas de `04` con sus propias respuestas y confirma o sustituye los ADRs; devuelve las lecciones upstream.
+1. **Cómo se adopta (ADR-0012):** el proyecto adoptante copia `docs/` + `plantillas/` + `scripts/` + `.frontexpert/` (manifiesto de integridad, ADR-0013), responde las 8 preguntas de `04` con sus propias respuestas y confirma o sustituye los ADRs; verifica su copia con `scripts/verify-corpus.sh` y devuelve las lecciones upstream.
 2. **Primera adopción:** identificar el primer proyecto y acompañar su fase 1 de cerca — el manual aún no ha sido ejecutado; la primera adopción lo estrena y lo corrige.
-3. **Opcional:** mini-CI de documentación en este repo (runner local + lint de markdown + `verify-stack.sh`); nada del playbook depende de ello.
-4. Los ADRs firmados aquí (0001–0012) son **defaults de referencia** con validez probada.
+3. **Opcional:** mini-CI de documentación en este repo (runner local + lint de markdown + `verify-corpus.sh` + `verify-stack.sh`); nada del playbook depende de ello.
+4. Los ADRs firmados aquí —**8**: 0001, 0002, 0004, 0006, 0008, 0010, 0011 y 0012— son **defaults de referencia** con validez probada; los vacantes 0003/0005/0007/0009 siguen abiertos como decisiones en `04` (ADR-0013).
