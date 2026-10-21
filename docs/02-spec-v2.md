@@ -147,7 +147,7 @@
 
 ### Fase 0 · Decisiones (sin código de producto)
 ADRs 0001–0008 (ver `docs/04-riesgos-y-decisiones.md`), `AGENTS.md` inicial y allowlist de MCP.
-**Acepta si:** los ADRs están aprobados por un humano y `AGENTS.md` pasa la revisión.
+**Acepta si (enmendado por ADR-0011):** ADRs 0001, 0002, 0006 y 0010 aprobados por un humano, `AGENTS.md` y allowlist revisados. 0003, 0005 y 0007 quedan diferidos con plazo: **necesarios antes de abrir la fase 3** (preguntas 3, 4 y 7 de `04`); 0009 se resuelve dentro de la fase 1 con el spike y su default.
 
 ### Fase 1 · Fundación y loop de verificación
 Monorepo pnpm + Turborepo. `apps/web` con landing SSG semántica. `apps/native` como **walking skeleton** (una pantalla). `packages/core`, `tokens`, `ui` y `config`. CI con lint, type-check, Vitest, Playwright smoke, axe, Lighthouse CI, build de ambas apps, gitleaks y boundaries.

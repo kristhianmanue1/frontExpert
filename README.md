@@ -37,9 +37,9 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | `plantillas/tarea-agente.md` | Plantilla de issue para tareas de agente |
 | `docs/FUENTES.md` | Fuentes consultadas |
 
-## Siguientes pasos propuestos
+## Siguientes pasos
 
-1. Revisar y aprobar `02-spec-v2.md` (o comentarlo).
-2. Responder las **preguntas abiertas** de `04-riesgos-y-decisiones.md`, sobre todo la prioridad del móvil, la autenticación y el hosting.
-3. Cerrar los ADRs 0001–0008 (fase 0).
-4. Arrancar la fase 1: scaffold + loop de verificación + walking skeleton nativo.
+1. **Fase 0 cerrada (21-oct, ADR-0011):** aceptados 0001, 0002, 0004, 0006, 0008, 0010; 0003/0005/0007 diferidos con plazo **antes de fase 3** (preguntas 3, 4 y 7); 0009 se resuelve en el spike de fase 1.
+2. **Paso siguiente:** registrar el runner local (`docs/runbooks/ci-local.md`) + primer workflow mínimo.
+3. Arrancar la fase 1: scaffold + loop de verificación + walking skeleton nativo.
+4. **Antes de fase 2:** definición corta de producto (pantallas y alcance del asistente) — el spec define el *cómo*; el *qué* le toca al dueño.

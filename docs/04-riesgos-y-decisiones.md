@@ -5,7 +5,7 @@
 | ADR | Decisión | Recomendación | Alternativas | Quién decide |
 |---|---|---|---|---|
 | **0001** | Stack base y versiones fijadas | **Decidida (21-oct):** la tabla de `02 §1`, revalidada con `scripts/verify-stack.sh` al abrir cada fase. Ver `adr/0001` | — | Tech lead ✓ (sesión 21-oct) |
-| **0002** | Política de bots de IA | `robots.txt` + contenido público igual para todos y **sin bypass de auth**. Verificación en el edge solo para rate-limit | Web Bot Auth propio | Tech lead + seguridad |
+| **0002** | Política de bots de IA | **Decidida (21-oct):** `robots.txt` + contenido público igual para todos y **sin bypass de auth**; verificación en el edge solo para rate-limit. Ver `adr/0002` | Web Bot Auth propio | Tech lead + seguridad ✓ (sesión 21-oct) |
 | **0003** | Backend | TypeScript: route handlers de Next para empezar; servicio separado (Hono o Fastify) si nativo y web necesitan una API estable versionada. **Nota:** debe resolver la persistencia transaccional que exige el registro de aprobaciones y el historial cargado desde BD (spec §4, riesgo R12) | FastAPI (solo con dependencia Python obligatoria, con tipos generados desde OpenAPI) | Tech lead |
 | **0004** | Orquestación de agentes | **Decidida (21-oct):** AI SDK 7 (`ToolLoopAgent` + `WorkflowAgent`); Mastra/LangGraph solo con ADR propio. Ver `adr/0004` | Mastra 1.x si hace falta memoria/RAG gestionado o su Studio de evals; LangGraph.js solo con grafos cíclicos complejos | Tech lead + IA ✓ (sesión 21-oct) |
 | **0005** | Autenticación | Better Auth (self-hosted, TS, web + Expo) **o** Clerk (gestionado). Decidir por requisitos de datos y costo | Auth.js, Supabase Auth | Producto + seguridad |
@@ -14,6 +14,7 @@
 | **0008** | i18n y analytics | **Decidida (21-oct):** `next-intl` + catálogo tipado (`core/analytics.ts`) con PostHog o similar self-hostable. Ver `adr/0008` | — | Producto ✓ (sesión 21-oct) |
 | **0009** | Tailwind en nativo | Spike en la fase 1, **time-box de 2 días**: NativeWind 5 rc frente a Uniwind 1.x (ambos Tailwind v4) frente a NativeWind 4 estable (Tailwind v3). Se decide por estabilidad y paridad de tokens. **Default si expira sin ganador claro:** NativeWind 4 con tokens generados desde `packages/tokens/theme.css` — se preserva la fuente única aunque baje la major de Tailwind en nativo (el time-box genérico ya lo exige §10; aquí queda el default que faltaba) | — | Tech lead |
 | **0010** | Infraestructura de CI | **Decidida (21-oct):** GitHub + runner self-hosted local (Docker; jobs de PR contenedorizados y sin secretos). Previews por PR eliminados: staging al merge. Ver `adr/0010` | Forgejo/Gitea interno (self-host total); bare git + hooks (mínimo, sin gates de revisión) | Tech lead ✓ (sesión 21-oct) |
+| **0011** | Puerta de fase 0 | **Decidida (21-oct):** se estrecha a lo que la fase 1 consume (0001/0002/0006/0010 + `AGENTS.md` + allowlist); 0003/0005/0007 con plazo "antes de fase 3". Ver `adr/0011` | Mantener la puerta original (retrasa el arranque sin proteger nada) | Dueño ✓ (sesión 21-oct) |
 
 ## Registro de riesgos
 
@@ -38,11 +39,15 @@
 
 ## Preguntas abiertas para el equipo o el cliente
 
-1. ¿Qué tan prioritario es el móvil? ¿Lanzamiento simultáneo o posterior a la web? (Afecta la fase 5 y si el skeleton es suficiente.)
-2. ¿Hay contenido privado que deba ser indexable por IA? (Si la respuesta es sí, se necesita un modelo de licenciamiento o API explícito, no un bypass.)
-3. ¿Qué proveedores de LLM están permitidos contractualmente y qué datos se les pueden enviar?
-4. ¿Hosting: Vercel aceptable o se requiere self-host o nube específica?
-5. ¿Existe sistema de diseño en Figma o se parte de shadcn por defecto?
-6. ¿Qué agentes de desarrollo usará el equipo (Claude Code, Codex, Cursor)? Afecta la configuración, no la arquitectura.
-7. ¿Requisitos regulatorios (LFPDPPP, accesibilidad WCAG 2.2 AA obligatoria, datos de salud o financieros)?
-8. **¿GitHub Pro (~USD 4/mes), org con plan, o control procedural hasta fase 1?** La protección de `main` (PR + 1 revisión, sin force-push) está paywalleada en repos privados del plan Free (403 verificado, ADR-0010). El repo vive mientras tanto en `kristhianmanue1/frontExpert` (privado); cuando exista la org, `gh repo transfer` lo mueve completo. **Diferida (21-oct, orden del dueño):** control procedural mientras tanto; nada del plan depende de esta respuesta.
+> Enmendado (21-oct, ADR-0011): cada pregunta lleva su **fecha real de necesidad** y un **default** que aplica si no hay respuesta a tiempo. Ningún default inventa: es el estado actual del spec o una asunción conservadora explícita, revocable en cuanto llega la respuesta.
+
+| # | Pregunta | Se necesita en | Default si no hay respuesta |
+|---|---|---|---|
+| 1 | ¿Prioridad del móvil: lanzamiento simultáneo o posterior a la web? | Planificar fase 5 | La actual: skeleton nativo desde fase 1, móvil completo en fase 5 |
+| 2 | ¿Hay contenido privado que deba ser indexable por IA? | Fase 6 | La de ADR-0002: lo público es público, lo privado nunca a bots; si algún día se quiere, API con credenciales propias |
+| 3 | ¿Qué proveedores de LLM están permitidos y qué datos se les pueden enviar? | **Fase 3** | `modelRegistry` abstracto + evals; ningún proveedor se fija sin esta respuesta |
+| 4 | ¿Hosting: Vercel, self-host o nube específica? | **Fase 3** (primer deploy real) | Vercel (el tier libre sirve para staging-only); self-host sigue como alternativa (ADR-0007) |
+| 5 | ¿Sistema de diseño en Figma o shadcn por defecto? | Fase 2 | shadcn (spec actual) |
+| 6 | ¿Qué agentes usará el equipo (Claude Code, Codex, Cursor)? | No bloquea | Plantillas neutras ya escritas |
+| 7 | ¿Requisitos regulatorios (LFPDPPP, WCAG 2.2 AA, datos sensibles)? | **Fase 3** | Asumir LFPDPPP + WCAG 2.2 AA: conservador y de bajo costo marginal |
+| 8 | ¿GitHub Pro (~USD 4/mes), org con plan, o procedural? (protección de `main`) | **Antes del primer PR de agente** | **Diferida (21-oct, orden del dueño):** control procedural — el humano abre y fusiona los primeros PRs. La protección está paywalleada en plan Free (403 verificado, ADR-0010); el repo vive en `kristhianmanue1/frontExpert` y se transfiere cuando exista la org |

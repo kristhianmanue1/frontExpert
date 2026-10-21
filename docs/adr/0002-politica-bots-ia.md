@@ -1,6 +1,6 @@
 # ADR-0002 · Política de bots de IA
 
-- **Estado:** propuesto · **Fecha:** 2026-10-17
+- **Estado:** aceptado (sesión 21-oct) · **Fecha:** 2026-10-17
 
 ## Contexto
 El spec recibido propone que un middleware detecte por User-Agent a los bots de IA (GPTBot, ClaudeBot, etc.) y les entregue "contenido limpio **sin pasar por auth de sesión**".
