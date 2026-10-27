@@ -100,7 +100,7 @@ Se puede añadir una **segunda revisión con otro agente** (p. ej. `/code-review
 
 ## 6. Continuidad entre sesiones
 
-Para que cada sesión no empiece de cero, `docs/handoff.md` se actualiza **al cerrar cada sesión** con: fase actual, tarea en curso, último PR, decisiones tomadas en la sesión (con enlace al ADR si aplica), bloqueos y el siguiente paso concreto. `AGENTS.md` indica leerlo al iniciar. Es un archivo corto que se reescribe cada vez; no es una bitácora.
+Para que cada sesión no empiece de cero, `docs/handoff.md` se actualiza **al cerrar cada sesión** siguiendo `plantillas/handoff.md` (ADR-0014): actualizado, modelo, fase, en curso —incluye el último PR, las decisiones de la sesión con enlace al ADR si aplica y los bloqueos—, siguiente paso concreto y reglas activas. `AGENTS.md` indica leerlo al iniciar. Es un archivo corto que se reescribe cada vez; no es una bitácora.
 
 ## 7. Cambio de modelo del loop: regenerar o parchear
 

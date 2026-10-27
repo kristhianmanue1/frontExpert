@@ -1,10 +1,10 @@
 # frontExpert — Preproyecto
 
 **Objetivo:** entregar el playbook —el "cómo"— con el que proyectos de AGTexperts construyen y mantienen frontends (web, iOS y Android) con **agentes de IA** bajo supervisión humana. **Este repo no construye producto: lo adoptan otros** (ADR-0012).
-**Estado:** playbook (base adoptable). Fase 0 cerrada (ADR-0011); sin código de producto por decisión (ADR-0012).
+**Estado:** playbook (base adoptable). Fase 0 cerrada (ADR-0011); sin código de producto por decisión (ADR-0012); primera adopción ejecutada (I0–I1, web — issue #2) y contrato de adopción **v2** (ADR-0014).
 **Licencia:** Apache-2.0 (`LICENSE`, SPDX: Apache-2.0) — alineada con skevi para la adopción conjunta (ADR-0013).
-**Inventario (verificado 21-oct):** 28 archivos de documentación y plantillas + licencia Apache-2.0 + **dos scripts ejecutables** (`verify-stack.sh`, vigencia del stack — observación, no gate; `verify-corpus.sh`, integridad del corpus) + plantilla de issue (`.github/`) + el manifiesto del corpus (`.frontexpert/`, ADR-0013). Sin `apps/`, sin `packages/`, sin `package.json`: nunca los habrá.
-**Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010).
+**Inventario (verificado 27-oct):** 31 archivos de documentación y plantillas (incluida la plantilla de issue de `.github/`) + licencia Apache-2.0 + **dos scripts ejecutables** (`verify-stack.sh`, vigencia del stack — observación, no gate; `verify-corpus.sh`, integridad del corpus) + el manifiesto del corpus (`.frontexpert/`, ADR-0013): **34 archivos con hash**. Sin `apps/`, sin `packages/`, sin `package.json`: nunca los habrá.
+**Fecha:** 2026-10-17 (versiones verificadas en esa fecha; docs actualizados el 21-oct con ADR-0010 y el 27-oct con ADR-0014).
 
 ## Resumen ejecutivo
 
@@ -33,12 +33,15 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 | `docs/04-riesgos-y-decisiones.md` | ADRs pendientes de la fase 0, registro de riesgos y preguntas abiertas |
 | `docs/05-evaluacion-ronda-adversarial.md` | Evaluación de la ronda externa de 5 revisores: qué se adoptó, qué estaba mal calibrado y el hallazgo `toolApproval` |
 | `docs/06-verificacion-empirica.md` | **Verificación contra npm, el código publicado y GitHub Advisory**: qué se confirmó, qué se refutó (incluidos errores propios) y cómo repetirlo |
-| `docs/07-ronda-adversarial-2026-10-21.md` | 2ª ronda adversarial (revisor de contexto fresco): veredictos H1–H9/P1–P8, hallazgos nuevos N1–N4 y parches aplicados |
-| `docs/08-ronda-adversarial-2026-10-21-ii.md` | 3ª ronda adversarial (contrato de adopción): precedencia, devolución de lecciones y oferta conjunta — cierre del issue #1 |
+| `docs/07-ronda-adversarial-2026-10-21.md` | Ronda adversarial I (revisor de contexto fresco): veredictos H1–H9/P1–P8, hallazgos nuevos N1–N4 y parches aplicados |
+| `docs/08-ronda-adversarial-2026-10-21-ii.md` | Ronda adversarial II (contrato de adopción): precedencia, devolución de lecciones y oferta conjunta — cierre del issue #1 |
+| `docs/09-ronda-adversarial-2026-10-27-iii.md` | Ronda adversarial III (contrato v2): ADR-0014 D1–D5 SÓLIDO, H1–H4 corregidos, N1–N4 absorbidos — lecciones del issue #2 |
 | `docs/adr/0002-politica-bots-ia.md` | ADR del hallazgo crítico |
 | `docs/adr/0013-adopcion-externa.md` | Licencia Apache-2.0, manifiesto del corpus (`.frontexpert/` + `verify-corpus.sh`) y corrección del inventario de ADRs |
+| `docs/adr/0014-adopcion-externa-v2.md` | Adopción externa v2 (lecciones del issue #2): manifiesto del adoptante, handoff de plantilla, scripts reubicables, licencia propia y CI en host macOS |
 | `plantillas/AGENTS.md` | Plantilla del archivo raíz para agentes |
 | `plantillas/tarea-agente.md` | Plantilla de issue para tareas de agente |
+| `plantillas/handoff.md` | Plantilla del handoff del adoptante (ADR-0014) |
 | `AGENTS.md` | Punto de entrada del agente en **este** repo (auto-adopción canaria, `docs/08`) |
 | `CONTRIBUTING.md` | Mecanismo de devolución de lecciones de adopción (issue #1, punto 6) |
 | `docs/FUENTES.md` | Fuentes consultadas |
@@ -47,15 +50,15 @@ El spec recibido **acierta en la dirección**: React + TypeScript, Next.js para 
 
 frontExpert (dominio) y skevi (método) se ofrecen como **dos adopciones separadas**:
 
-- El paquete conjunto es un **índice**: no fusiona registros (nada de `skevi-gate.json` junto a `docs/04`), ni mezcla manifiestos (`frontexpert/corpus-manifest/v1` es propio — ADR-0013), ni promete resultado: a la fecha de este documento **no consta ejecución de la combinación**.
+- El paquete conjunto es un **índice**: no fusiona registros (nada de `skevi-gate.json` junto a `docs/04`), ni mezcla manifiestos (`frontexpert/corpus-manifest/v1` es propio — ADR-0013), ni promete resultado: la combinación **se ejecutó por primera vez** en la primera adopción (I0–I1, solo web; issue #2) — las fases restantes siguen sin estrenar.
 - Oferta de entrada «skevi mínimo» (gates + plantilla de `AGENTS.md` + config + 1 registro): definida en skevi, fuera de este corpus — no se cita cifra de tamaño sin fuente (`docs/08`, H6).
 - Escalera sugerida: adoptar el método solo → el dominio solo → el conjunto, acompañando cada salto.
-- Cláusula de honestidad: **el manual no ha sido ejecutado**; la primera adopción lo estrena, con acompañamiento (ADR-0012).
+- Cláusula de honestidad: **el manual fue estrenado** en la primera adopción (I0–I1, solo web; issue #2, ADR-0014); nativo y fases 2–6 siguen sin ejecutar.
 - Licencias alineadas en Apache-2.0 (ADR-0013): sin análisis de compatibilidad.
 
 ## Siguientes pasos
 
-1. **Cómo se adopta (ADR-0012):** el proyecto adoptante copia **todo lo que cubre el manifiesto** — `docs/`, `plantillas/`, `scripts/`, `.frontexpert/`, `README.md`, `LICENSE`, `AGENTS.md`, `CONTRIBUTING.md`, `.github/` —, responde las 8 preguntas de `04` con sus propias respuestas y confirma o sustituye los ADRs; verifica su copia con `scripts/verify-corpus.sh` y devuelve las lecciones upstream (mecanismo: `CONTRIBUTING.md`).
-2. **Primera adopción:** identificar el primer proyecto y acompañar su fase 1 de cerca — el manual aún no ha sido ejecutado; la primera adopción lo estrena y lo corrige.
+1. **Cómo se adopta (ADR-0012, contrato v2 en ADR-0014):** el proyecto adoptante copia **todo el corpus** salvo lo declarado no copiable — `docs/handoff.md` nace de `plantillas/handoff.md` —, reescribe `README.md` y `AGENTS.md` como suyos y conserva su `LICENSE` (compatibilidad Apache-2.0); responde las 8 preguntas de `04` y confirma o sustituye los ADRs; genera su **manifiesto propio como último paso** y verifica contra él (`verify-corpus.sh`: manifiesto por argumento o `CORPUS_MANIFEST`; en modo skevi, `scripts/frontexpert/`); devuelve las lecciones upstream (mecanismo: `CONTRIBUTING.md`).
+2. **Primera adopción:** ejecutada (I0–I1, web; issue #2) — sus lecciones devenieron el contrato v2 (ADR-0014). Siguientes: acompañar las fases restantes del adoptante.
 3. **Opcional:** mini-CI de documentación en este repo (runner local + lint de markdown + `verify-corpus.sh` + `verify-stack.sh`); nada del playbook depende de ello.
-4. Los ADRs firmados aquí —**8**: 0001, 0002, 0004, 0006, 0008, 0010, 0011 y 0012— son **defaults de referencia** con validez probada; los vacantes 0003/0005/0007/0009 siguen abiertos como decisiones en `04` (ADR-0013).
+4. Los ADRs firmados aquí —**10**: 0001, 0002, 0004, 0006, 0008, 0010, 0011, 0012, 0013 y 0014— son **defaults de referencia** con validez probada; los vacantes 0003/0005/0007/0009 siguen abiertos como decisiones en `04` (ADR-0013).

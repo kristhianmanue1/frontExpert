@@ -15,8 +15,16 @@ El contrato de adopción (ADR-0012) dice «devuelve las lecciones upstream». Es
 - Maintainer único: best effort, **sin SLA**. Ningún issue tiene fecha de respuesta prometida.
 - No se aceptan PRs directos al corpus de terceros: primero la lección, después el parche.
 
+## El manifiesto del adoptante (ADR-0014)
+
+La verificación del adoptante es contra su **propio manifiesto**, no contra el canario upstream (que describe este playbook, no tu derivado):
+
+1. Genera tu manifiesto como **último paso** de la adopción (y tras cada enmienda): formato `shasum -c` sobre una lista explícita de rutas.
+2. **Fuera** de la lista (cambian siempre): `README.md`, `AGENTS.md`, `docs/handoff.md` (nace de `plantillas/handoff.md`) y tus ADRs enmendados o nuevos. **Dentro, con digest propio:** tu `LICENSE` (compatibilidad Apache-2.0) y el resto del corpus copiado.
+3. **Depósito documentado obligatorio:** la lista y el comando de regeneración viven en la cabecera de tu copia de `verify-corpus.sh` o en tu propio CONTRIBUTING — la regla «cambio a ruta listada ⇒ regenerar en el mismo commit» solo es auditable si el comando está escrito.
+
 ## Cómo actualiza su copia un adoptante
 
 1. Contrasta la revisión de tu copia (`git rev-parse HEAD` o tu fecha de copia) contra el último commit de este repo.
-2. Corre `scripts/verify-corpus.sh` en tu copia: comprueba que nadie la tocó localmente.
+2. Corre `verify-corpus.sh` **contra tu manifiesto** (por argumento o `CORPUS_MANIFEST`; ADR-0014): comprueba que nadie tocó tu derivado localmente.
 3. Re-copiar es responsabilidad del consumidor: compara con `diff -ru` y revisa tus ADRs locales antes de sobrescribir; tus decisiones locales nunca las sobrescribe el upstream.
